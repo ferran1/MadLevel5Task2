@@ -53,11 +53,11 @@ class AddGameFragment : Fragment() {
     }
 
     private fun addGame(){
-        val name = binding.etName.toString()
-        val platform = binding.etPlatform.toString()
-        val day = binding.etDay.toString()
-        val month = binding.etMonth.toString()
-        val year = binding.etYear.toString()
+        val name = binding.etName.text.toString()
+        val platform = binding.etPlatform.text.toString()
+        val day = binding.etDay.text.toString()
+        val month = binding.etMonth.text.toString()
+        val year = binding.etYear.text.toString()
         val date = "$day $month $year"
 
 //        if (name.isNotBlank() && platform.isNotBlank() && dateIsValid(day, month, year)) {
