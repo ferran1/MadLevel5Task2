@@ -12,7 +12,8 @@
     <string name="year">Year</string>
     <string name="delete_all_games">Delete All Games</string>
     <string name="game_backlog">Game Backlog</string>
-    <string name="please_fill_in_a_title">Please fill in a title.</string>
+    <string name="add_game_error_msg">Input field(s) are not filled in correctly, please the input fields and try again.</string>
     <string name="successfully_deleted_game">Successfully deleted game</string>
     <string name="undo">UNDO</string>
+    <string name="save">Save</string>
 </resources>

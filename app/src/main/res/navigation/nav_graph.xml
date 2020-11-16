@@ -18,5 +18,9 @@
         android:id="@+id/addGameFragment"
         android:name="com.example.madlevel5task2.ui.AddGameFragment"
         android:label="fragment_add_game"
-        tools:layout="@layout/fragment_add_game" />
+        tools:layout="@layout/fragment_add_game" >
+        <action
+            android:id="@+id/action_addGameFragment_to_gameBacklogFragment"
+            app:destination="@id/gameBacklogFragment" />
+    </fragment>
 </navigation>

@@ -5,14 +5,11 @@ import androidx.room.PrimaryKey
 import java.util.*
 
 @Entity(tableName = "game_table")
-data class Game (
+class Game(
+    val name: String,
+    val platform: String,
+    val releaseDate: String,
 
     @PrimaryKey(autoGenerate = true)
-    var id: Long? = null,
-
-    val name: String,
-
-    val platform: String,
-
-    var releaseDate: Date,
+    val id: Long? = null
 )
