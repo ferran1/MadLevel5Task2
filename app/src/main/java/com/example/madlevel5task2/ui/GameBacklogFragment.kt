@@ -75,7 +75,7 @@ class GameBacklogFragment : Fragment() {
         viewModel.gamesList.observe(viewLifecycleOwner, { gamesList ->
             this@GameBacklogFragment.gamesList.clear()
             this@GameBacklogFragment.gamesList.addAll(gamesList)
-            this@GameBacklogFragment.gamesList.sortBy { it.releaseDate }
+            this@GameBacklogFragment.gamesList.sortByDescending { it.releaseDate }
             gameBacklogAdapter.notifyDataSetChanged()
         })
     }
@@ -89,9 +89,46 @@ class GameBacklogFragment : Fragment() {
             adapter = gameBacklogAdapter
         }
 
-//        createItemTouchHelperSwipe().attachToRecyclerView(binding.rvGames)
+        createItemTouchHelperSwipe().attachToRecyclerView(binding.rvGames)
     }
 
+    private fun createItemTouchHelperSwipe(): ItemTouchHelper {
 
+        // Callback which is used to create the ItemTouch helper. Only enables left swipe.
+        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            // Enables or Disables the ability to move items up and down.
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            // Callback triggered when a user swiped an item.
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val gameToDelete = gamesList[position]
+                viewModel.deleteGame(gameToDelete)
+                Snackbar.make(
+                    view!!,
+                    getString(R.string.successfully_deleted_game),
+                    Snackbar.LENGTH_LONG
+                )
+                    .setAction(getString(R.string.undo)) {
+                        viewModel.insertGame(
+                            gameToDelete.name,
+                            gameToDelete.platform,
+                            gameToDelete.releaseDate
+                        )
+                    }
+                    .show()
+            }
+        }
+        return ItemTouchHelper(callback)
+    }
 
 }
